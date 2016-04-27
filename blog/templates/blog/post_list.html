@@ -1,21 +1,13 @@
-<html>
-    <head>
-        <title>My First Django Apps</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="">Django Girls Blog</a></h1>
-        </div>
-
-       {{posts}}
-       <br>
-        {% for story in stories %}
-        <div>
-            <p>published = {{story.published_date}}</p>
-            <h1><a href="">{{story.title}}</a></h1>
-            <p>{{story.text|linebreaks}}</p>
-            <br>
-        {% endfor %}
-        </div>
-    </body>
-</html>
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% for story in stories %}
+     <div class="post">
+         <div class="date">
+             <p>published: {{ story.published_date }}</p>
+         </div>
+         <h1><a href="{% url 'post_detail' pk=story.pk %}">{{ story.title }}</a></h1>
+         <p>{{ story.text|linebreaks }}</p>
+     </div>
+    {% endfor %}
+{% endblock %}
+               
